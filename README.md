@@ -6,8 +6,20 @@
 
 Before installing project, be sure to have installed all dependencies and apps to run React Native Expo project on your device.
 
-### Install all plackages from package.json:
+##### Install all plackages from package.json:
 
 ```js
 npm i
+```
+
+##### OR
+
+```js
+yarn;
+```
+
+run the project:
+
+```js
+yarn start
 ```
