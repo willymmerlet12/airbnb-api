@@ -23,3 +23,11 @@ run the project:
 ```js
 yarn start
 ```
+
+## Package Used
+
+1. Axios
+2. Expo
+3. React Native async storage
+4. React Navigation
+5. React Native Maps
