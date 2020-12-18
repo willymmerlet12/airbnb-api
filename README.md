@@ -26,8 +26,8 @@ yarn start
 
 ## Package Used
 
-1. Axios
-2. Expo
-3. React Native async storage
-4. React Navigation
-5. React Native Maps
+1. [Axios](https://www.npmjs.com/package/axios)
+2. [Expo](https://github.com/expo/expo/blob/HEAD/CONTRIBUTING.md)
+3. [React Native async storage](https://reactnative.dev/docs/asyncstorage)
+4. [React Navigation](https://reactnavigation.org/)
+5. [React Native Maps](https://github.com/react-native-maps/react-native-maps)
