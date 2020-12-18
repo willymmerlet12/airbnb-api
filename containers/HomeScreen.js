@@ -12,6 +12,9 @@ import {
 import axios from "axios";
 import { Entypo } from "@expo/vector-icons";
 import { ScrollView } from "react-native";
+import { TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "react-native";
 
 export default function HomeScreen() {
   const [data, setData] = useState({});
@@ -48,61 +51,73 @@ export default function HomeScreen() {
           renderItem={({ item }) => {
             return (
               <View>
-                <View>
-                  <Image
-                    style={styles.img}
-                    source={{ uri: item.photos[0].url }}
-                  ></Image>
-                  <Text style={styles.price}>{item.price} € </Text>
-                </View>
-                <View style={{ justifyContent: "space-around" }}>
-                  <Text
-                    numberOfLines={1}
-                    style={styles.title}
-                    onPress={() => {
-                      navigation.navigate("Rooms");
-                    }}
-                  >
-                    {item.title}
-                  </Text>
-                  <View style={{ flexDirection: "row" }}>
-                    <Entypo
-                      name="star"
-                      size={20}
-                      style={styles.star}
-                      color={item.ratingValue > 0 ? "#fbb30c" : "lightgrey"}
-                    />
-                    <Entypo
-                      name="star"
-                      size={20}
-                      style={styles.star}
-                      color={item.ratingValue > 1 ? "#fbb30c" : "lightgrey"}
-                    />
-                    <Entypo
-                      name="star"
-                      size={20}
-                      style={styles.star}
-                      color={item.ratingValue > 2 ? "#fbb30c" : "lightgrey"}
-                    />
-                    <Entypo
-                      name="star"
-                      size={20}
-                      style={styles.star}
-                      color={item.ratingValue > 3 ? "#fbb30c" : "lightgrey"}
-                    />
-                    <Entypo
-                      name="star"
-                      size={20}
-                      style={styles.star}
-                      color={item.ratingValue > 4 ? "#fbb30c" : "lightgrey"}
-                    />
-                    <Text style={styles.review}>{item.reviews} reviews</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("Rooms", {
+                      id: item._id,
+                    });
+                  }}
+                >
+                  <View>
+                    <Image
+                      style={styles.img}
+                      source={{ uri: item.photos[0].url }}
+                    ></Image>
+
+                    <Text style={styles.price}>{item.price} € </Text>
                   </View>
+                </TouchableOpacity>
+                <View style={styles.infos}>
+                  <View style={styles.infosView}>
+                    <Text style={styles.title} numberOfLines={1}>
+                      {item.title}
+                    </Text>
+
+                    <View style={styles.ratingView}>
+                      <View style={{ flexDirection: "row" }}>
+                        <Entypo
+                          name="star"
+                          size={20}
+                          style={styles.star}
+                          color={item.ratingValue > 0 ? "#fbb30c" : "lightgrey"}
+                        />
+                        <Entypo
+                          name="star"
+                          size={20}
+                          style={styles.star}
+                          color={item.ratingValue > 1 ? "#fbb30c" : "lightgrey"}
+                        />
+                        <Entypo
+                          name="star"
+                          size={20}
+                          style={styles.star}
+                          color={item.ratingValue > 2 ? "#fbb30c" : "lightgrey"}
+                        />
+                        <Entypo
+                          name="star"
+                          size={20}
+                          style={styles.star}
+                          color={item.ratingValue > 3 ? "#fbb30c" : "lightgrey"}
+                        />
+                        <Entypo
+                          name="star"
+                          size={20}
+                          style={styles.star}
+                          color={item.ratingValue > 4 ? "#fbb30c" : "lightgrey"}
+                        />
+                      </View>
+                      <Text style={styles.review}> {item.reviews} reviews</Text>
+                    </View>
+                  </View>
+
                   <Image
-                    style={styles.avatar}
-                    source={{ url: item.user.account.photo.url }}
+                    source={{
+                      uri: item.user.account.photo.url,
+                    }}
+                    style={styles.userPic}
                   />
                 </View>
+
                 <View style={styles.separator}></View>
               </View>
             );
@@ -119,10 +134,9 @@ const styles = StyleSheet.create({
     width: 380,
 
     marginTop: 10,
-    marginBottom: 12,
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
     marginBottom: 5,
   },
   price: {
@@ -149,7 +163,6 @@ const styles = StyleSheet.create({
     borderRadius: 400 / 2,
   },
   separator: {
-    marginTop: 40,
     marginBottom: 10,
     borderWidth: 1,
     borderColor: "lightgrey",
@@ -162,5 +175,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10,
+  },
+  infos: {
+    height: 100,
+
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  userPic: {
+    height: 70,
+    width: 70,
+    borderRadius: 40,
+    marginRight: 10,
+  },
+  infosView: {
+    width: "70%",
+  },
+  ratingView: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 15,
   },
 });

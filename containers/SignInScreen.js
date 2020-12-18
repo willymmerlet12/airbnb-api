@@ -15,31 +15,33 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import axios from "axios";
 
-export default function SignInScreen({ setToken }) {
+export default function SignInScreen({ setToken, setId }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigation = useNavigation();
 
   const handleSubmit = async () => {
-    try {
-      const response = await axios.post(
-        "https://express-airbnb-api.herokuapp.com/user/log_in",
-        {
-          email,
-          password,
-        },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+    if (email && password) {
+      try {
+        const response = await axios.post(
+          "https://express-airbnb-api.herokuapp.com/user/log_in",
+          {
+            email,
+            password,
+          }
+        );
 
-      console.log(response.data);
-      const userToken = "secret-token";
-      setToken(userToken);
-    } catch (error) {
-      setError(error.response.data.message);
-      console.log(error.response.data.message);
+        console.log(response.data);
+        
+        setToken(response.data.token);
+        setId(response.data.id);
+      } catch (error) {
+        setError(error.response.data.message);
+        console.log(error.response.data.message);
+      }
+    } else {
+      alert("fill in all fields");
     }
   };
 

@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function SignUpScreen({ setToken }) {
+export default function SignUpScreen({ setToken, setId }) {
   const [data, setData] = useState();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -43,8 +43,9 @@ export default function SignUpScreen({ setToken }) {
             }
           );
           console.log(response.data);
-          const userToken = "secret-token";
-          setToken(userToken);
+
+          setToken(response.data.token);
+          setId(response.data._id);
           alert("vous êtes connecté");
         } catch (error) {
           alert("catch");
